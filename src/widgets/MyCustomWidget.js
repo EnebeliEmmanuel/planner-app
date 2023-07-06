@@ -4,12 +4,21 @@ const MyCustomWidget = () => {
     const [note, setNote] = useState('');
 
     useEffect(() => {
-      // Save note to local storage whenever it changes
-      localStorage.setItem('note', note);
-    }, [note]);
+      const storedNote = localStorage.getItem('note');
+      if (storedNote) {
+        setNote(storedNote);
+      }
+    }, []);
   
     const handleNoteChange = (event) => {
-      setNote(event.target.value);
+      const newNote = event.target.value;
+      setNote(newNote);
+      localStorage.setItem('note', newNote);
+    };
+  
+    const handleClearNote = () => {
+      setNote('');
+      localStorage.removeItem('note');
     };
   return (
     <div>
@@ -30,7 +39,7 @@ const MyCustomWidget = () => {
       }}
     ></textarea>
     <button
-      onClick={() => setNote('')}
+      onClick={handleClearNote}
       style={{
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
         backdropFilter: 'blur(5px)',
