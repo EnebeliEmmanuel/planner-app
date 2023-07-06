@@ -191,45 +191,6 @@ function App() {
         }}>+ Add Widget</button>
       }
      </div>
-     <div className='none-widget'>
-      {widgets.length > 0 && widgets.map((widget, index) => {
-       if (widget.area === 'none-widget') {
-        return (
-         <div style={{ padding: 10,}} className='widget-container'>
-          <div style={{ marginBottom: 10 }}>
-           <select value={widget.area}
-            onChange={(e) => {
-             let widgetList = [...widgets]
-             widgetList[index].area = e.target.value
-             setWidgets(widgetList)
-            }}
-           >
-            <option value="none-widget">Floating</option>
-            <option value="left-widget">Left</option>
-            <option value="main-widget">Main</option>
-            <option value="right-widget">Right</option>
-           </select>
-           <button
-            onClick={() => {
-             removeWidget(widget.id)
-            }}
-            style={{ background: "none", border: "none", color: "white", fontSize: "15px", cursor: "pointer", float: "right" }}
-           >Close</button>
-          </div>
-          {widget.component}
-         </div>
-        )
-       }
-      })}
-      {widgets.filter(widget => widget.area === 'right-widget').length < 3 && widgets.filter(widget => widget.area === 'right-widget').length > 0 &&
-       <button
-        className='add-widget-button'
-        onClick={() => {
-         setShowWidgetModal(true)
-         setSelectedWidgetArea('right-widget')
-        }}>+ Add Widget</button>
-      }
-     </div>
     </div>
    </div>
   </>
